@@ -1,4 +1,5 @@
-import { blocks, post, posts } from "lib/notion";
+import { RenderBlocks } from "@components/library/content/RenderBlocks";
+import { getBlocks, getItem, posts } from "@utils/notion";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
 import React from "react";
@@ -16,7 +17,7 @@ interface Props {
 const NotionPost: NextPage<Props> = (props) => {
   console.log(props);
 
-  return <div>NotionPost</div>;
+  return <RenderBlocks blocks={props.blocks} />;
 };
 
 export default NotionPost;
@@ -24,9 +25,9 @@ export default NotionPost;
 export const getStaticProps: GetStaticProps = async (ctx) => {
   let { id } = ctx.params as IParams;
   // Get the dynamic id
-  let page_result = await post(id);
+  let page_result = await getItem(id);
   // Fetch the post
-  let { results } = await blocks(id);
+  let { results } = await getBlocks(id);
   // Get the children
   return {
     props: {

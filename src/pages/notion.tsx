@@ -1,4 +1,4 @@
-import { posts } from "lib/notion";
+import { posts } from "@utils/notion";
 import { NextPage } from "next";
 import Link from "next/link";
 import React from "react";
